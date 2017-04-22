@@ -162,8 +162,8 @@ $(document).ready(function(){
      login_credentials.quantity = $("#quant").val();
      login_credentials.name = $("#name").val();
      login_credentials.age = $("#age").val();
-
-     $.getJSON('http://cc782d27.ngrok.io', function (data) {
+     console.log(login_credentials);
+     $.post('http://cc782d27.ngrok.io', login_credentials, function (data) {
        console.log(response);
      })
 
