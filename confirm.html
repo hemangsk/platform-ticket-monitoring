@@ -10,10 +10,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<link href="style.css" rel="stylesheet">
+
 
   </head>
   <script>
-  /*
+
   $.getJSON('', function (data) {
     if(data.result == 1){
     console.log("yes");
@@ -22,7 +24,7 @@
 }
   })
 
-  */
+
   </script>
   <body>
     <main>
@@ -45,27 +47,43 @@
 <div class="card">
 <div class="card-content">
 
-TICKET DETAILS
+<div class="ticket-details">TICKET DETAILS</div>
 <script>
 $(document).ready(function () {
   var data = JSON.parse(sessionStorage.ticketData);
+console.log(data);
   $('.name').html(data.name);
     $('.quantity').html(data.quantity);
     $('.price').html(data.quantity * 30);
-    $('.discounted').html(data.quantity * 30 - (data.quantity * 30 * (10*100)));
+    $('.discount').html(data.quantity * 30 - 10);
 })
 </script>
-<div class="name"></div>
+<br><br>
+<div class="row frow">
+<SPAN class="detail">NAME</span>
+<div class="name fieldrow"></div>
 
-<div class="Quantity"></div>
+<SPAN class="detail">Quantity</span>
+<div class="quantity fieldrow"></div>
 
-<div class="price"></div>
+<SPAN class="detail">PRICE</span>
+<div class="price fieldrow"></div>
 
-<div class="discount"></div>
+<SPAN class="detail">DISCOUNT</span>
+<div class="discount fieldrow"></div>
 
-<hr></hr>
+</div>
 </div>
 
+<style>
+.fieldrow{
+  flex-grow: 1;
+
+}
+.frow{
+display: flex;
+}
+</style>
 </div>
 </div>
 
@@ -73,7 +91,46 @@ $(document).ready(function () {
 <div class="col m3">
   <div class="card">
     <div class="card-content">
-  <a class="waves-effect waves-light btn">CONFIRM</a>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input  id="cardno" type="text" class="validate">
+          <label for="cardno">Account</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="cvv" type="text" class="validate">
+          <label for="cvv">CVV</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="holdersname" type="text" class="validate">
+          <label for="holdersname">Card Holder</label>
+        </div>
+      </div>
+
+  <a class="submit waves-effect waves-light btn">CONFIRM</a>
+  <script>
+
+  $('.submit').click(function () {
+    var login_credentials = {};
+
+    login_credentials.cardno = $("#cardno").val();
+    login_credentials.cvv = $("#cvv").val();
+    login_credentials.holdersname = $("#holdersname").val();
+    console.log(login_credentials);
+    //sessionStorage.ticketData = JSON.stringify(login_credentials);
+    $.post(' ', JSON.stringify(login_credentials), function (data) {
+      console.log(response);
+      if (JSON.parse(response.validation)==1){
+        console.log("Payment Confirmed");
+      }
+    })
+
+  })
+  </script>
 </div>
 </div>
 </div>
@@ -120,9 +177,17 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
-
+.ticket-details{
+  font-size: 1.2em;
+letter-spacing: 0.1em;
+font-weight: 500;
+}
 main {
   flex: 1 0 auto;
 }
-
+.detail{
+  text-transform: uppercase;
+  color: darkslategrey;
+  font-weight: 500;
+}
 </style>

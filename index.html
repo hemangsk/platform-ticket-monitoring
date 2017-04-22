@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-
+<link href="style.css" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -159,10 +159,11 @@ $(document).ready(function(){
      login_credentials.gender = $("#gender option:selected").val();
      login_credentials.id1 = $("#auth option:selected").val();
      login_credentials.id = $("#authval").val();
-     login_credentials.quantity = $("#quant").val();
+     login_credentials.quantity = $("#quantity").val();
      login_credentials.name = $("#name").val();
      login_credentials.age = $("#age").val();
      console.log(login_credentials);
+     sessionStorage.ticketData = JSON.stringify(login_credentials);
      $.post('http://cc782d27.ngrok.io', JSON.stringify(login_credentials), function (data) {
        console.log(response);
        if (JSON.parse(response.validation)==1){
