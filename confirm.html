@@ -12,6 +12,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 
   </head>
+  <script>
+  /*
+  $.getJSON('', function (data) {
+    if(data.result == 1){
+    console.log("yes");
+  } else{
+  window.location.href="http://localhost:8080";
+}
+  })
+
+  */
+  </script>
   <body>
     <main>
   <nav>
@@ -34,7 +46,24 @@
 <div class="card-content">
 
 TICKET DETAILS
-<BR><BR><BR><BR><BR><BR>
+<script>
+$(document).ready(function () {
+  var data = JSON.parse(sessionStorage.ticketData);
+  $('.name').html(data.name);
+    $('.quantity').html(data.quantity);
+    $('.price').html(data.quantity * 30);
+    $('.discounted').html(data.quantity * 30 - (data.quantity * 30 * (10*100)));
+})
+</script>
+<div class="name"></div>
+
+<div class="Quantity"></div>
+
+<div class="price"></div>
+
+<div class="discount"></div>
+
+<hr></hr>
 </div>
 
 </div>

@@ -163,8 +163,12 @@ $(document).ready(function(){
      login_credentials.name = $("#name").val();
      login_credentials.age = $("#age").val();
      console.log(login_credentials);
-     $.post('http://cc782d27.ngrok.io', login_credentials, function (data) {
+     $.post('http://cc782d27.ngrok.io', JSON.stringify(login_credentials), function (data) {
        console.log(response);
+       if (JSON.parse(response.validation)==1){
+         sessionStorage.userLogin = true;
+         sessionStorage.ticketData = JSON.stringify(login_credentials);
+       }
      })
 
    })
